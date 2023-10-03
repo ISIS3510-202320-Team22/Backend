@@ -27,11 +27,12 @@ class User(models.Model):
         return self.email
 
 class Post(models.Model):
-    text = models.CharField(max_length=200)
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='posts')
     up_votes = models.IntegerField(default=0)
     down_votes = models.IntegerField(default=0)
     reported = models.BooleanField(default=False)
+    text = models.CharField(max_length=200)
+    image = models.ImageField(upload_to='images/', null=True, blank=True)
 
     def __str__(self) -> str:
         return str(self.id) + ' - ' + self.text
